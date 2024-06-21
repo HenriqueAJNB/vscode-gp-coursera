@@ -2,12 +2,12 @@
 name = "crud-api"
 version = "0.1.0"
 description = "FastAPI example for Advanced VSCode for Software Developers course on coursera platform"
-authors = ["Henrique Branco <henrique.ajnbranco@gmail.com>"]
+authors = ["Henrique Branco"]
 readme = "README.md"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.10"
 fastapi = "^0.111.0"
 uvicorn = "^0.29.0"
 

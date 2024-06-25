@@ -8,7 +8,15 @@ app.add_event_handler("startup", startup_event)
 
 
 @app.post("/items/")
-def create_item(item: Item):
+def create_item(item: Item) -> Item:
+    """GET API route that inserts an item into the database.
+
+    Args:
+        item (Item): The item is to be inserted into the database.
+
+    Returns:
+        Item: The item returned as an HTTP response.
+    """
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute(

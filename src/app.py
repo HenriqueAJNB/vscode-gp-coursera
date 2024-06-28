@@ -3,8 +3,14 @@ from fastapi import FastAPI, HTTPException
 from src.database import get_db, startup_event
 from src.models import Item
 
-app = FastAPI()
-app.add_event_handler("startup", startup_event)
+
+def create_app():
+    app = FastAPI()
+    app.add_event_handler("startup", startup_event)
+    return app
+
+
+app = create_app()
 
 
 @app.post("/items/")
@@ -28,6 +34,15 @@ def create_item(item: Item) -> Item:
     return item
 
 
+@app.get("/items/{item_id}")
+def read_item(item_id: int):
+    connection = get_db()
+    item = connection.execute("SELECT * FROM items WHERE id = ?", (item_id,)).fetchone()
+    if item is None:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return dict(item)
+
+
 @app.get("/items/")
 def read_items() -> list[dict[Item]]:
     """GET API route named items that retrieve all items from the database.
@@ -40,15 +55,6 @@ def read_items() -> list[dict[Item]]:
     conn = get_db()
     items = conn.execute("SELECT * FROM items").fetchall()
     return [dict(item) for item in items]
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int):
-    conn = get_db()
-    item = conn.execute("SELECT * FROM items WHERE id = ?", (item_id,)).fetchone()
-    if item is None:
-        raise HTTPException(status_code=404, detail="Item not found")
-    return dict(item)
 
 
 @app.put("/items/{item_id}")

@@ -29,7 +29,14 @@ def create_item(item: Item) -> Item:
 
 
 @app.get("/items/")
-def read_items():
+def read_items() -> list[dict[Item]]:
+    """GET API route named items that retrieve all items from the database.
+
+    Returns
+    -------
+    list[dict[Item]]
+         All items available in the database as a list of dictionary
+    """
     conn = get_db()
     items = conn.execute("SELECT * FROM items").fetchall()
     return [dict(item) for item in items]

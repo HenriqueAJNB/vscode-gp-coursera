@@ -44,12 +44,12 @@ def read_item(item_id: int):
 
 
 @app.get("/items/")
-def read_items() -> list[dict[Item]]:
+def read_items() -> list[dict[str, int | str | float | bool]]:
     """GET API route named items that retrieve all items from the database.
 
     Returns
     -------
-    list[dict[Item]]
+    list[dict[str, int | str | float | bool]]
          All items available in the database as a list of dictionary
     """
     conn = get_db()

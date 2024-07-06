@@ -3,7 +3,7 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class Item(BaseModel):
+class StockKeepingUnit(BaseModel):
     id: Optional[int] = None
     name: str
     price: float

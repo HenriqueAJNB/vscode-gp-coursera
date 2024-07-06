@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 
 from src.database import get_db, startup_event
-from src.models import Item
+from src.models import StockKeepingUnit
 
 
 def create_app():
@@ -14,7 +14,7 @@ app = create_app()
 
 
 @app.post("/items/")
-def create_item(item: Item) -> Item:
+def create_item(item: StockKeepingUnit) -> StockKeepingUnit:
     """GET API route that inserts an item into the database.
 
     Args:
@@ -58,7 +58,7 @@ def read_items() -> list[dict[str, int | str | float | bool]]:
 
 
 @app.put("/items/{item_id}")
-def update_item(item_id: int, item: Item):
+def update_item(item_id: int, item: StockKeepingUnit):
     conn = get_db()
     conn.execute(
         "UPDATE items SET name = ?, price = ?, is_offer = ? WHERE id = ?",

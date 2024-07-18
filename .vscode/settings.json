@@ -11,4 +11,7 @@
     "terminal.integrated.env.windows": {
     "PYTHONPATH": "${workspaceFolder}/"
 },
+"liveshare.guestApprovalRequired": true,
+"liveshare.allowGuestDebugControl": true,
+"liveshare.languages.allowGuestCommandControl": true,
 }
